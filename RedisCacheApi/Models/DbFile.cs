@@ -10,6 +10,6 @@ namespace RedisCacheApi.Models
         [MaxLength(500)]
         public string? Content { get; set; }
         public DateTime LastTimeUsed { get; set; } = default;
-        public DbFolder? FolderForeign { get; set; }
+        public virtual DbFolder? FolderForeign { get; set; }
     }
 }
