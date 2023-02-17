@@ -14,7 +14,7 @@ using Xunit;
 
 namespace RedisCacheApi.Tests
 {
-    internal class IntegrationTestFactory : WebApplicationFactory<Program>, IAsyncLifetime
+    public class IntegrationTestFactory : WebApplicationFactory<Program>, IAsyncLifetime
     {
         private readonly MsSqlTestcontainer _sqlContainer;
         private readonly RedisTestcontainer _redisContainer;
