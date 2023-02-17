@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Serialization;
 using RedisCacheApi.Data;
 using RedisCacheApi.Data.FileRepos;
 using RedisCacheApi.Data.FolderRepos;
@@ -15,15 +16,20 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddSingleton<IConnectionMultiplexer>(options =>
     ConnectionMultiplexer.Connect(builder.Configuration["ConnectionStrings:RedisConnection"]));
 
-builder.Services.AddControllers();
-
-//Automapper
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
 //Dependency Injection
 builder.Services.AddScoped<ISqlFolderRepo, SqlServerFolderRepo>();
 builder.Services.AddScoped<ISqlFileRepo, SqlServerFileRepo>();
 builder.Services.AddScoped<INoSqlFileRepo, RedisFileRepo>();
+
+//Automapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+//Patch Request
+builder.Services.AddControllers().AddNewtonsoftJson(s =>
+{
+    s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+    s.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
