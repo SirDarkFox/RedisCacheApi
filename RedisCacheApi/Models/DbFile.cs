@@ -5,6 +5,7 @@ namespace RedisCacheApi.Models
     public class DbFile
     {
         public string Id { get; set; } = $"File:{Guid.NewGuid}";
+        [Required]
         [MaxLength(50)]
         public string Name { get; set; } = null!;
         [MaxLength(500)]
