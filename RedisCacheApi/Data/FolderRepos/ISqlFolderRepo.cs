@@ -1,4 +1,6 @@
-﻿namespace RedisCacheApi.Data.FolderRepos
+﻿using RedisCacheApi.Models;
+
+namespace RedisCacheApi.Data.FolderRepos
 {
     public interface ISqlFolderRepo
     {

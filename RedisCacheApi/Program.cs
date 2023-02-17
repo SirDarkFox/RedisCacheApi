@@ -17,6 +17,9 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(options =>
 
 builder.Services.AddControllers();
 
+//Automapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 //Dependency Injection
 builder.Services.AddScoped<ISqlFolderRepo, SqlServerFolderRepo>();
 builder.Services.AddScoped<ISqlFileRepo, SqlServerFileRepo>();
